@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hand.springbootmybatis.mapper.AccountMapper">
+    <!-- 这里是作为一个变量使用 -->
+    <sql id="table">account</sql>
+
+    <!-- id属性填写mapper文件里的函数名称 xxType是参数或是结果的类型根据情况填写 -->
+    <select id="getAllAccount" resultType="com.hand.springbootmybatis.entity.Account">
+        SELECT
+        id, name, mobile, remark
+        FROM account
+    </select>
+
+
+    <!-- 根据name查询 -->
+    <select id="getAccountByName" resultType="com.hand.springbootmybatis.entity.Account" parameterType="String">
+        SELECT
+        id, name, mobile, remark
+        FROM
+        <include refid="table"/>
+        WHERE
+        name like concat('%', #{name}, '%')
+    </select>
+
+    <select id="getAccountByMobile" resultType="com.hand.springbootmybatis.entity.Account" parameterType="String">
+        SELECT
+        id, name, mobile, remark
+        FROM
+        <include refid="table"/>
+        WHERE
+        mobile = #{mobile}
+    </select>
+
+    <!-- 增 -->
+    <insert id="addAccount" parameterType="com.hand.springbootmybatis.entity.Account">
+        INSERT INTO
+        <include refid="table"/>
+        (name, mobile, remark)
+        VALUES
+        (#{name}, #{mobile}, #{remark})
+    </insert>
+
+    <!-- 改 -->
+    <update id="modifyAccount" parameterType="com.hand.springbootmybatis.entity.Account">
+        UPDATE
+        <include refid="table"/>
+        SET
+        <!--<if test="name != null">name = #{name}</if>-->
+        name  = #{name}, mobile = #{mobile}, remark = #{remark}
+        WHERE
+        id = #{id}
+    </update>
+
+    <!-- 删 -->
+    <delete id="removeAccount" parameterType="String">
+        DELETE FROM
+        <include refid="table"/>
+        WHERE
+        id = #{id}
+    </delete>
+</mapper>
