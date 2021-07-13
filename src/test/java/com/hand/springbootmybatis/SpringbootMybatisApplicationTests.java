@@ -42,6 +42,7 @@ class SpringbootMybatisApplicationTests {
         stringRedisTemplate.opsForList().leftPush("mylist", "1");
         stringRedisTemplate.opsForList().leftPush("mylist", "2");
         stringRedisTemplate.opsForList().leftPush("mylist", "3");
+        stringRedisTemplate.opsForList().leftPush("mylist", "4");
     }
     @Test
     public void test2() {
