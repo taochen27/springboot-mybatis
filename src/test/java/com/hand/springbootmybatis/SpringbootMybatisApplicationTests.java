@@ -10,8 +10,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.List;
-
 @SpringBootTest
 @RunWith(SpringRunner.class)
 class SpringbootMybatisApplicationTests {
@@ -43,6 +41,7 @@ class SpringbootMybatisApplicationTests {
         stringRedisTemplate.opsForValue().append("msg", "hello");
         stringRedisTemplate.opsForList().leftPush("mylist", "1");
         stringRedisTemplate.opsForList().leftPush("mylist", "2");
+        stringRedisTemplate.opsForList().leftPush("mylist", "3");
     }
     @Test
     public void test2() {
